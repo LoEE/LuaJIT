@@ -358,7 +358,8 @@ endif
 
 ifneq ($(HOST_SYS),$(TARGET_SYS))
   ifeq (Windows,$(TARGET_SYS))
-    HOST_XCFLAGS+= -malign-double -DLUAJIT_OS=LUAJIT_OS_WINDOWS
+    # -malign-double is not needed on ARM (and this is the host compiler we are using)
+    HOST_XCFLAGS+=  -DLUAJIT_OS=LUAJIT_OS_WINDOWS
   else
   ifeq (Linux,$(TARGET_SYS))
     HOST_XCFLAGS+= -DLUAJIT_OS=LUAJIT_OS_LINUX
