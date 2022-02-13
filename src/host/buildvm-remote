@@ -1,0 +1,6 @@
+#!/bin/zsh
+echo "buildvm: [$#] $*" 2>&1
+
+set -ex
+
+multipass exec thb-vm32 -- bash -c "cd $PWD && make 'TARGET_SYS=$TARGET_SYS' 'TARGET_FLAGS=$TARGET_FLAGS' 'HOST_CC=i686-linux-gnu-gcc-10' 'CROSS=./dummy-cross' host/buildvm && host/buildvm $*"

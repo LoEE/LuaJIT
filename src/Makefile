@@ -473,7 +473,7 @@ DASM_DASC= vm_$(DASM_ARCH).dasc
 
 BUILDVM_O= host/buildvm.o host/buildvm_asm.o host/buildvm_peobj.o \
 	   host/buildvm_lib.o host/buildvm_fold.o
-BUILDVM_T= host/buildvm
+BUILDVM_T?= host/buildvm
 BUILDVM_X= $(BUILDVM_T)
 
 HOST_O= $(MINILUA_O) $(BUILDVM_O)
@@ -648,7 +648,7 @@ host/buildvm_arch.h: $(DASM_DASC) $(DASM_DEP) $(DASM_DIR)/*.lua lj_arch.h lua.h 
 
 host/buildvm.o: $(DASM_DIR)/dasm_*.h
 
-$(BUILDVM_T): $(BUILDVM_O)
+host/buildvm: $(BUILDVM_O)
 	$(E) "HOSTLINK  $@"
 	$(Q)$(HOST_CC) $(HOST_ALDFLAGS) -o $@ $(BUILDVM_O) $(HOST_ALIBS)
 
